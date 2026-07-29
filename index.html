@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logan Hall — Mechanical Design Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE1;
+    --paper-alt:#E2DECF;
+    --ink:#1C1B19;
+    --blueprint:#1E3A5F;
+    --blueprint-light:#3E6491;
+    --steel:#71767A;
+    --steel-light:#B9BCB6;
+    --callout:#B23A2E;
+    --line:#c7c2b3;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--blueprint);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(237,234,225,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:60px;
+  }
+  .nav-name{font-family:'Big Shoulders Display';font-weight:800;font-size:20px;letter-spacing:0.03em;}
+  .nav-links{display:flex;gap:26px;list-style:none;padding:0;margin:0;}
+  .nav-links a{
+    color:var(--ink);text-decoration:none;font-size:13px;
+    font-family:'IBM Plex Mono';letter-spacing:0.04em;text-transform:uppercase;
+    border-bottom:2px solid transparent;padding-bottom:4px;
+  }
+  .nav-links a:hover{border-bottom-color:var(--callout);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:100px 0 90px;
+    overflow:hidden;
+    background-image:
+      linear-gradient(var(--paper) 0%, var(--paper) 100%),
+      repeating-linear-gradient(0deg, rgba(30,58,95,0.05) 0px, rgba(30,58,95,0.05) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(30,58,95,0.05) 0px, rgba(30,58,95,0.05) 1px, transparent 1px, transparent 40px);
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.14em;
+    color:var(--blueprint);text-transform:uppercase;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero-eyebrow::before{content:"";width:26px;height:1px;background:var(--callout);display:inline-block;}
+  .hero h1{font-size:clamp(42px,7vw,88px);line-height:0.95;max-width:820px;}
+  .hero h1 span{color:var(--blueprint);}
+  .hero-sub{
+    font-size:17px;color:#3a3835;max-width:560px;margin-top:22px;
+  }
+  .hero-meta{
+    display:flex;gap:34px;margin-top:44px;flex-wrap:wrap;
+  }
+  .hero-meta div{font-family:'IBM Plex Mono';font-size:12px;color:var(--steel);}
+  .hero-meta strong{display:block;color:var(--ink);font-size:14px;margin-bottom:2px;}
+  .hero-links{margin-top:36px;display:flex;gap:18px;flex-wrap:wrap;}
+  .hero-links a{
+    font-family:'IBM Plex Mono';font-size:13px;text-decoration:none;
+    border:1px solid var(--ink);padding:9px 16px;color:var(--ink);
+    transition:all .15s ease;
+  }
+  .hero-links a:hover{background:var(--ink);color:var(--paper);}
+
+  /* SECTION HEADERS */
+  .section{padding:80px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px;}
+  .section-num{font-family:'IBM Plex Mono';color:var(--callout);font-size:14px;}
+  .section-head h2{font-size:clamp(28px,4vw,42px);}
+  .section-desc{color:var(--steel);max-width:600px;margin-top:10px;font-size:15px;}
+
+  /* TITLE BLOCK (signature element) */
+  .titleblock{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--ink);
+    font-family:'IBM Plex Mono';
+    font-size:11px;
+    margin-top:22px;
+  }
+  .titleblock div{
+    padding:8px 10px;border-right:1px solid var(--ink);border-top:1px solid var(--ink);
+  }
+  .titleblock div:last-child{border-right:none;}
+  .titleblock .tb-label{color:var(--steel);text-transform:uppercase;letter-spacing:0.06em;font-size:9px;display:block;margin-bottom:3px;}
+  .titleblock .tb-val{color:var(--ink);font-weight:600;}
+  .titleblock .status-active{color:var(--blueprint);}
+  .titleblock .status-award{color:var(--callout);}
+
+  /* FEATURED PROJECT (Loon Industries) */
+  .featured{
+    background:var(--ink);color:var(--paper);
+    padding:90px 0;
+  }
+  .featured .section-num{color:#e8926b;}
+  .featured h2{color:var(--paper);}
+  .featured .section-desc{color:var(--steel-light);}
+  .featured a{color:#8fb4d9;}
+  .fig{
+    border:1px dashed var(--steel-light);
+    color:var(--steel-light);
+    font-family:'IBM Plex Mono';font-size:12px;
+    padding:60px 20px;text-align:center;margin:30px 0;
+    background:rgba(255,255,255,0.02);
+  }
+  .fig-paper{
+    border:1px dashed var(--steel);
+    color:var(--steel);
+    font-family:'IBM Plex Mono';font-size:12px;
+    padding:50px 20px;text-align:center;margin:24px 0;
+    background:rgba(0,0,0,0.02);
+  }
+  .status-ribbon{
+    display:inline-block;font-family:'IBM Plex Mono';font-size:12px;
+    letter-spacing:0.06em;text-transform:uppercase;
+    border:1px solid #e8926b;color:#e8926b;padding:6px 14px;margin-bottom:30px;
+  }
+  .rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:50px;}
+  @media (max-width:800px){.rev-grid{grid-template-columns:1fr;}}
+  .rev-card{border:1px solid #45443f;padding:28px;}
+  .rev-tag{font-family:'IBM Plex Mono';color:#e8926b;font-size:12px;letter-spacing:0.08em;margin-bottom:6px;display:block;}
+  .rev-card h3{color:var(--paper);font-size:26px;margin-bottom:16px;}
+  .rev-card ul{padding-left:18px;margin:14px 0;}
+  .rev-card li{margin-bottom:8px;font-size:14px;color:#d8d5cc;}
+  .rev-card .callout-box{
+    margin-top:18px;padding:14px;border-left:2px solid #e8926b;
+    background:rgba(232,146,107,0.06);font-size:13.5px;color:#e9e6dd;
+  }
+  .rd-note{
+    margin-top:50px;border:1px solid #45443f;padding:28px;background:rgba(255,255,255,0.02);
+  }
+  .rd-note h4{color:var(--paper);font-size:18px;margin-bottom:10px;letter-spacing:0.02em;}
+  .rd-note p{font-size:14px;color:#d8d5cc;margin:0;}
+  .dim-stats{display:flex;gap:0;margin-top:36px;flex-wrap:wrap;border-top:1px solid #45443f;border-bottom:1px solid #45443f;}
+  .dim-stat{flex:1;min-width:140px;padding:20px 18px;border-right:1px solid #45443f;}
+  .dim-stat:last-child{border-right:none;}
+  .dim-stat .num{font-family:'IBM Plex Mono';font-size:24px;color:var(--paper);font-weight:600;}
+  .dim-stat .lbl{font-family:'IBM Plex Mono';font-size:10.5px;color:var(--steel-light);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;}
+
+  /* LARGE PROJECT CARDS */
+  .project-card{
+    border:1px solid var(--ink);
+    margin-bottom:56px;
+    background:var(--paper-alt);
+  }
+  .project-card-inner{padding:36px;}
+  .project-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+  .project-top h3{font-size:clamp(26px,4vw,36px);}
+  .award-tag{
+    font-family:'IBM Plex Mono';font-size:11px;color:var(--callout);
+    border:1px solid var(--callout);padding:5px 10px;white-space:nowrap;
+    text-transform:uppercase;letter-spacing:0.04em;
+  }
+  .project-context{color:var(--steel);font-size:13px;font-family:'IBM Plex Mono';margin-top:8px;}
+  .project-card h4{
+    font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;
+    letter-spacing:0.06em;color:var(--blueprint);margin:26px 0 10px;font-weight:600;
+  }
+  .project-card p{margin:0 0 6px;font-size:14.5px;}
+  .project-card ul{margin:8px 0;padding-left:20px;}
+  .project-card li{font-size:14.5px;margin-bottom:6px;}
+  .stat-strip{display:flex;flex-wrap:wrap;gap:0;margin-top:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat-strip .dim-stat{border-right:1px solid var(--line);}
+  .stat-strip .dim-stat .num{color:var(--ink);}
+  .stat-strip .dim-stat .lbl{color:var(--steel);}
+  .lessons{
+    margin-top:20px;padding:16px 18px;border-left:3px solid var(--callout);
+    background:rgba(178,58,46,0.05);font-size:14px;
+  }
+  .lessons .tag{font-family:'IBM Plex Mono';font-size:11px;color:var(--callout);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;}
+
+  /* SMALL PROJECTS */
+  .small-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  @media (max-width:750px){.small-grid{grid-template-columns:1fr;}}
+  .small-card{border:1px solid var(--line);background:var(--paper-alt);padding:26px;}
+  .small-card .sc-num{font-family:'IBM Plex Mono';color:var(--callout);font-size:12px;}
+  .small-card h4{font-size:20px;margin:8px 0 4px;}
+  .small-card .sc-context{font-family:'IBM Plex Mono';font-size:12px;color:var(--steel);margin-bottom:12px;}
+  .small-card p{font-size:14px;margin:0 0 8px;}
+  .small-card .sc-outcome{font-size:13.5px;color:var(--blueprint);margin-top:10px;font-weight:500;}
+  .small-card.empty{
+    display:flex;align-items:center;justify-content:center;
+    border-style:dashed;color:var(--steel);font-family:'IBM Plex Mono';font-size:13px;
+  }
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:60px 0 40px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;}
+  footer h2{font-size:clamp(30px,5vw,50px);}
+  .footer-links{display:flex;gap:22px;flex-wrap:wrap;}
+  .footer-links a{font-family:'IBM Plex Mono';font-size:13px;text-decoration:none;color:var(--ink);}
+  .footer-note{margin-top:40px;font-family:'IBM Plex Mono';font-size:11px;color:var(--steel-light);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">LOGAN HALL</div>
+    <ul class="nav-links">
+      <li><a href="#loon">Loon Industries</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#small-projects">Other Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Mechanical Design Engineer</div>
+    <h1>Logan Hall<br>builds <span>hardware<br>that works.</span></h1>
+    <p class="hero-sub">Mechanical design engineer specializing in robotics and mechanism design — from competitive robots to a founder-led robotic arm startup. I design, prototype, and iterate fast, and I'm honest about what didn't work along the way.</p>
+    <div class="hero-meta">
+      <div><strong>4</strong>Major Projects</div>
+      <div><strong>Founder</strong>Loon Industries LLC</div>
+      <div><strong>2×</strong>FRC Awards</div>
+      <div><strong>UW–Madison</strong>SAE Baja</div>
+    </div>
+    <div class="hero-links">
+      <a href="mailto:loganhall@loon.industries">EMAIL →</a>
+      <a href="https://www.linkedin.com/in/logan-hall-63b013291/" target="_blank">LINKEDIN →</a>
+      <a href="#loon">VIEW WORK ↓</a>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURED: LOON INDUSTRIES -->
+<section class="featured" id="loon">
+  <div class="wrap">
+    <div class="section-head" style="border:none;margin-bottom:0;">
+      <span class="section-num">FEATURED</span>
+      <h2>Loon Industries</h2>
+    </div>
+    <p class="section-desc" style="max-width:680px;">Founder &amp; Mechanical Lead — Loon Industries LLC · Founded 2025 · In Development, Prototype 2 (Loon 1.1)</p>
+
+    <div class="status-ribbon">Borgen Design Competition Finalist — $2,000 Grant, UW–Madison</div>
+
+    <p style="max-width:680px;font-size:15.5px;color:#e9e6dd;">Loon Industries designs low-cost, 5-axis desktop robotic arms aimed at lowering the barrier to entry into robotics for students and hobbyists. As founder and mechanical lead, I've designed the complete mechanical system for both generations of the arm, while two co-founders lead the software side.</p>
+
+    <div class="fig">[ Add hero photo/render of Loon 1.1 here ]</div>
+
+    <div class="rev-grid">
+      <div class="rev-card">
+        <span class="rev-tag">REV A</span>
+        <h3>Loon 1.0</h3>
+        <p style="font-size:14px;color:#d8d5cc;">Target: $300 retail / ~$200 build cost. Optimized almost entirely around cost — 3D-printed structure, minimal purchased hardware.</p>
+        <ul>
+          <li>5 axes: 3× NEMA 17 (55 N·cm) + 2× pancake NEMA 17 (23 N·cm)</li>
+          <li>All-belt gear reduction: two 2-stage + two 1-stage gearboxes, plus a planetary/ring gear base</li>
+          <li><strong style="color:#fff;">Differential mechanism at the wrist</strong> — compact 2-axis motion from a single coupled drive</li>
+          <li>Two-sided support structure — zero cantilevered loads, fully enclosed electronics</li>
+          <li>0.5 lb payload target, ~14" reach</li>
+        </ul>
+        <div class="callout-box"><strong>What didn't work:</strong> 113 unique parts — belt-gearbox shaft play compounded across stages, hurting rigidity. Shoulder joint complexity made position encoding impossible.</div>
+      </div>
+      <div class="rev-card">
+        <span class="rev-tag">REV B</span>
+        <h3>Loon 1.1</h3>
+        <p style="font-size:14px;color:#d8d5cc;">Ground-up redesign. Target raised to $375 / ~$250 cost after 1.0's payload proved insufficient for real use.</p>
+        <ul>
+          <li>Purchased planetary gearboxes for rigidity: two 25:1 + one 10:1, plus 3 single-stage belt drives</li>
+          <li>Belt-driven base (replacing the ring gear); all belts now use dedicated tensioners</li>
+          <li>Encoders relocated to motor back (paired with driver), controlled via CAM — solves 1.0's shoulder-encoding gap</li>
+          <li>Sleeker form factor; two motors + gearboxes now exposed as a deliberate weight/aesthetics tradeoff</li>
+          <li>1 lb payload target (2× improvement), same ~14" reach</li>
+        </ul>
+        <div class="callout-box"><strong>Part count:</strong> 113 → ~20. Also shifted process: build a rough rigid prototype first, then refine design from what's learned — rather than fully designing before prototyping.</div>
+      </div>
+    </div>
+
+    <div class="dim-stats">
+      <div class="dim-stat"><div class="num">113→20</div><div class="lbl">Unique Parts, 1.0 vs 1.1</div></div>
+      <div class="dim-stat"><div class="num">2×</div><div class="lbl">Payload Increase</div></div>
+      <div class="dim-stat"><div class="num">$300→$375</div><div class="lbl">Retail Target</div></div>
+      <div class="dim-stat"><div class="num">14"</div><div class="lbl">Reach, Both Gens</div></div>
+    </div>
+
+    <div class="rd-note">
+      <h4>R&amp;D Notes — Cycloidal Gearbox Exploration</h4>
+      <p>While chasing larger reductions with minimal backlash, I explored cycloidal gearboxes as an alternative to belt drives — building 3 printed prototypes and disassembling a purchased commercial unit to study its geometry. Conclusion: a reliable 3D-printed cycloidal gearbox was too costly and mechanically complex to justify at this scale. Purchased planetary gearboxes proved the more cost-effective, rigid solution — a decision that directly shaped Loon 1.1's architecture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LARGE PROJECTS -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Competitive Robots</h2>
+    </div>
+    <p class="section-desc">Two seasons of FIRST Robotics Competition (FRC) with Team 2169, King TeC — designing and building a full competitive robot from scratch within a ~2.5 month season.</p>
+
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div>
+            <h3>Sir Morien</h3>
+            <div class="project-context">Team 2169, King TeC · FRC · Junior Year</div>
+          </div>
+          <div class="award-tag">Industrial Design Award</div>
+        </div>
+        <div class="fig-paper">[ Add photo of Sir Morien here ]</div>
+        <h4>Challenge</h4>
+        <p>Shoot basketball-sized balls into a hopper 10ft high using AprilTag vision detection, while staying agile enough to maneuver around opposing robots — and physically climb a stepped, inclined pull-up bar structure.</p>
+        <h4>Role &amp; Approach</h4>
+        <p>Mechanical design engineer and technician. Designed a two-way pneumatically actuated flywheel shooter (able to fire at the hopper or redirect opponents' balls), a climbing system using a constant-force spring return and winch with pneumatic dampening, and a two-speed transmission with a dog-shifting clutch. Modeled in Autodesk Inventor with trajectory physics and load calculations sizing the climber and shooter.</p>
+        <div class="stat-strip">
+          <div class="dim-stat"><div class="num">30s</div><div class="lbl">Climb Time</div></div>
+          <div class="dim-stat"><div class="num">10s</div><div class="lbl">Shooter Cycle</div></div>
+          <div class="dim-stat"><div class="num">12/16</div><div class="lbl">Shot Accuracy</div></div>
+          <div class="dim-stat"><div class="num">12th/~40</div><div class="lbl">Both Competitions</div></div>
+        </div>
+        <div class="lessons"><span class="tag">Lessons Learned</span>The two-way flywheel required slowing/reversing spin to fire the opposite direction, hurting cycle time badly — a single-direction shooter with a hopper feed would've been faster. The two-speed transmission added complexity without a clear payoff; overall drivetrain speed was too cumbersome for the game's pace.</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-top">
+          <div>
+            <h3>Lady Guinevere</h3>
+            <div class="project-context">Team 2169, King TeC · FRC "Charged Up" (2023) · Senior Year</div>
+          </div>
+          <div class="award-tag">Design Innovation — World Championship</div>
+        </div>
+        <div class="fig-paper">[ Add photo of Lady Guinevere here ]</div>
+        <h4>Challenge</h4>
+        <p>2023's "Charged Up" required picking up cones and inflated cubes from the ground, orienting them, and placing cones on poles / cubes on platforms. Most teams relied on a player-handling station that pre-oriented cones upright — the goal here was to skip that station entirely and pick up cones in <em>any</em> orientation directly off the ground.</p>
+        <h4>Role &amp; Approach</h4>
+        <p>Mechanical Captain — designed the entire mechanical system. Built a full swerve-drive drivetrain and a 4-axis arm with a 2-axis wrist, giving enough degrees of freedom to reach and reorient a cone in any ground position. Arm extended over 6ft horizontally; robot stood 8.5ft tall at full vertical extension. Raised/lowered via a winch-driven single-stage extension.</p>
+        <div class="lessons"><span class="tag">Lessons Learned</span>The winch-driven single-stage arm extension was slow relative to the arm's size, making vertical movement cumbersome despite its capability. The claw's reach extended past the front bumper, leaving it exposed to contact from opposing robots — a defensive gap for future iterations.</div>
+        <p style="margin-top:18px;font-size:14px;color:var(--steel);">Result: earned the <strong style="color:var(--ink);">Design Innovation Award</strong>, qualifying for the <strong style="color:var(--ink);">FIRST World Championship in Houston, TX</strong>, competing as a NASA-sponsored team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMALL PROJECTS -->
+<section class="section" id="small-projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Other Work</h2>
+    </div>
+    <p class="section-desc">Shorter engagements and side projects — internship work, team contributions, and early competitions.</p>
+
+    <div class="small-grid">
+      <div class="small-card">
+        <span class="sc-num">A</span>
+        <h4>Polymer Tube Flaring Fixture</h4>
+        <div class="sc-context">Boston Scientific — Internship · Solo Design, Prototype &amp; Fabrication</div>
+        <p>Designed, prototyped, and fabricated a fixture for flaring the ends of 7mm polymer tubing used in medical device manufacturing. Clamps the tube and lowers it onto a heated conical mandrel to form the flange.</p>
+        <div class="sc-outcome">Performed as designed. Main limitation: the cam clamp lacked a positive lock, so it could be pressed open under tight clamping pressure — a self-locking cam geometry would fix this.</div>
+      </div>
+
+      <div class="small-card">
+        <span class="sc-num">B</span>
+        <h4>SAE Baja — Drivetrain</h4>
+        <div class="sc-context">University of Wisconsin–Madison · Ongoing Team Project</div>
+        <p>Contributing member of the Drivetrain subteam, converting the car's power transmission from drive-shaft to belt-drive. Designed a belt tensioner and protective casing for the new belt drive.</p>
+        <div class="fig-paper" style="margin-top:14px;">[ Add photo of the car here ]</div>
+        <div class="sc-outcome">Also supported broader build efforts across the drivetrain subteam.</div>
+      </div>
+
+      <div class="small-card">
+        <span class="sc-num">C</span>
+        <h4>Structural Crane Competition</h4>
+        <div class="sc-context">Freshman Year · Small Group (2–3)</div>
+        <p>Built a crane scored on max weight lifted, min lift time, and min crane weight. Noticed the rules had no size constraint on the crane itself — only on counterweight mass — and used a 6ft beam winched fully horizontal as the counterweight.</p>
+        <div class="sc-outcome">Lifted 5 lbs in under a minute with an exceptionally light counterweight system — placed 5th of ~100 teams.</div>
+      </div>
+
+      <div class="small-card empty">+ Project slot open</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's talk.</h2>
+      <p style="max-width:420px;color:var(--steel);margin-top:12px;">Open to mechanical design and robotics engineering roles.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:loganhall@loon.industries">loganhall@loon.industries</a>
+      <a href="https://www.linkedin.com/in/logan-hall-63b013291/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="wrap footer-note">© 2026 Logan Hall</div>
+</footer>
+
+</body>
+</html>
